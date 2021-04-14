@@ -1,4 +1,4 @@
-Cmd environment for testing ros_abb140control_ser control:
+Cmd environment for ROS master control:
 
 1. open VRep
 cd ~/Downloads/V-REP_PRO_EDU_V3_6_1_Ubuntu18_04/
