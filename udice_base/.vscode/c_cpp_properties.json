@@ -1,0 +1,19 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "",
+        "limitSymbolsToIncludedHeaders": true
+      },
+      "includePath": [
+        "/home/sky/catkin_u_ws/devel/include/**",
+        "/opt/ros/melodic/include/**",
+        "/home/sky/catkin_u_ws/src/my_robot_tutorials/include/**",
+        "/home/sky/catkin_ws_uD/src/udice_base/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS"
+    }
+  ],
+  "version": 4
+}
