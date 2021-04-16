@@ -18,7 +18,7 @@ def CRotateSerHandle(req):
 		# rotate function for VRep - check parameter with /ds_robot_arm_EmergencyS is false
 		rospy.loginfo("CRotate service provided : cube is grabbed")
 		return True		
-	elif req.imgRequestPosition == 2: # rotate
+	elif req.imgRequestPosition == 2: # rotate the cube rotator base with 180 degree
 		rospy.loginfo("CRotate service request received : 2nd position")
 		# rotate function for VRep - check parameter with /ds_robot_arm_EmergencyS is false
 		rospy.loginfo("CRotate service provided : 2nd position")
