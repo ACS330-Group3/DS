@@ -70,6 +70,10 @@ def cube_lifter():
 		try:
 			CLift = rospy.ServiceProxy("/ds_CLift_ser", dsCLiftsrv)
 			response = CLift('up')	
+			rospy.loginfo("ds_ros_master.py - CLift down after gripping!")
+			time.sleep(1) #pause for one sec
+			response = CLift('down')
+			rospy.set_param('ds_ud_Location', 'CubeRotator')
 			if response.CLiftSuccessed == True:
 				rospy.loginfo("CLift up successed! - Cube rotator action init.!")
 				cube_rotator()
@@ -98,7 +102,11 @@ def cube_lifter():
 		rospy.wait_for_service("/ds_CLift_ser")
 		try:
 			CLift = rospy.ServiceProxy("/ds_CLift_ser", dsCLiftsrv)
-			response = CLift('down')	
+			response = CLift('up')	
+			rospy.loginfo("ds_ros_master.py - CLift down after release gripping!")
+			time.sleep(1) #pause for one sec
+			response = CLift('down')
+			rospy.set_param('ds_ud_Location', 'CubeLifter')	
 			if response.CLiftSuccessed == True:
 				rospy.loginfo("CLift down successed! - Cube ready to leave DS!")
 				pubCR2L.publish(True) # tell omniplatform to retrieve the udice

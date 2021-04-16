@@ -7,22 +7,49 @@ import rospy
 
 from ud_msgs.srv import dsCLiftsrv
 
+from ControlVRep.cubeRotatorLifterControl import *
+# import rotate function
+
+import time
+
 def CLiftSerHandle(req):
 	if str(req.CLiftDirection) == 'up':
 		rospy.loginfo("CLift service request received : up")
 		# lift function for VRep - check parameter with /ds_robot_arm_EmergencyS is false
 		rospy.loginfo("CLift service provided : up")
-		cubeLocation = 'CubeRotator'
-		rospy.loginfo("CL is : {}".format(cubeLocation))
-		rospy.set_param('ds_ud_Location', cubeLocation)
+
+		counter = 0
+		while rospy.get_param("/ds_robot_arm_EmergencyS"):
+			if counter == 0:
+				rospy.loginfo("ds_cube_rotator.py - lifter movement pause!")
+				counter = 200
+			counter = counter - 1
+			time.sleep(.005) # pause when ds_robot_arm_EmergencyS is true
+		cubeRotatorLifterControlFun(None,None,'up')
+		time.sleep(1) #pause 1 secs
+
+		#cubeLocation = 'CubeRotator'
+		#rospy.loginfo("CL is : {}".format(cubeLocation))
+		#rospy.set_param('ds_ud_Location', cubeLocation)
 		return True
 	elif str(req.CLiftDirection) == 'down':
 		rospy.loginfo("CLift service request received : down")
 		# lift function for VRep - check parameter with /ds_robot_arm_EmergencyS is false
 		rospy.loginfo("CLift service provided : down")
-		cubeLocation = 'CubeLifter'
-		rospy.loginfo("CL is : {}".format(cubeLocation))
-		rospy.set_param('ds_ud_Location', cubeLocation)
+
+		counter = 0
+		while rospy.get_param("/ds_robot_arm_EmergencyS"):
+			if counter == 0:
+				rospy.loginfo("ds_cube_rotator.py - lifter movement pause!")
+				counter = 200
+			counter = counter - 1
+			time.sleep(.005) # pause when ds_robot_arm_EmergencyS is true
+		cubeRotatorLifterControlFun(None,None,'down')
+		time.sleep(1) #pause 1 secs
+
+		#cubeLocation = 'CubeLifter'
+		#rospy.loginfo("CL is : {}".format(cubeLocation))
+		#rospy.set_param('ds_ud_Location', cubeLocation)
 		return True
 	return False
 

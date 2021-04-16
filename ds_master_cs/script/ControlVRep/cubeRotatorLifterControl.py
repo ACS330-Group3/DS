@@ -29,14 +29,19 @@ def Start(IP='127.0.0.1', PORT=19998):# Local IP and API address (19999)
 
 def cubeRotatorLifterControlFun(angleBase, angleHolder, liftDirection):
 	# start VREP connection
-	clientID = Start()
+	#clientID = Start()
 	# retrieve revolute joint handles 
-	errorCode, angleBaseHandler = vrep.simxGetObjectHandle(clientID,'Revolute_joint_dsCRB',vrep.simx_opmode_oneshot_wait)
-	errorCode, angleHolderHandler = vrep.simxGetObjectHandle(clientID,'Revolute_joint_dsCRH',vrep.simx_opmode_oneshot_wait)
-	errorCode, liftHandler = vrep.simxGetObjectHandle(clientID,'Prismatic_joint_dsCLB',vrep.simx_opmode_oneshot_wait)
+	#errorCode, angleBaseHandler = vrep.simxGetObjectHandle(clientID,'Revolute_joint_dsCRB',vrep.simx_opmode_oneshot_wait)
+	#errorCode, angleHolderHandler = vrep.simxGetObjectHandle(clientID,'Revolute_joint_dsCRH',vrep.simx_opmode_oneshot_wait)
+	#errorCode, liftHandler = vrep.simxGetObjectHandle(clientID,'Prismatic_joint_dsCLB',vrep.simx_opmode_oneshot_wait)
 
 	# run control cmd when function run
 	if angleBase != None:
+		# start VREP connection
+		clientID = Start(PORT=19997)
+		# retrieve revolute joint handles 
+		errorCode, angleBaseHandler = vrep.simxGetObjectHandle(clientID,'Revolute_joint_dsCRB',vrep.simx_opmode_oneshot_wait)	
+	
 		print("angleBase is : {}". format(angleBase))
 		returnCode = vrep.simxSetJointTargetPosition(clientID,angleBaseHandler,int(angleBase)*math.pi/180,vrep.simx_opmode_oneshot)
 		#returnCode = vrep.simxSetJointTargetVelocity(clientID, angleBaseHandler, 1, vrep.simx_opmode_oneshot)
@@ -44,12 +49,24 @@ def cubeRotatorLifterControlFun(angleBase, angleHolder, liftDirection):
 
 	# prebuilt function
 	if angleHolder != None:
+
+		# start VREP connection
+		clientID = Start(PORT=19997)
+		# retrieve revolute joint handles 
+		errorCode, angleHolderHandler = vrep.simxGetObjectHandle(clientID,'Revolute_joint_dsCRH',vrep.simx_opmode_oneshot_wait)	
+
 		print("angleHolder is : {}". format(angleHolder))
 		returnCode = vrep.simxSetJointTargetPosition(clientID,angleHolderHandler,int(angleHolder)*math.pi/180,vrep.simx_opmode_oneshot)
 		#returnCode = vrep.simxSetJointTargetVelocity(clientID, angleBaseHandler, 1, vrep.simx_opmode_oneshot)
 		print("angleHolder function finished and return code is : {}". format(returnCode))
 
 	if liftDirection != None:
+
+		# start VREP connection
+		clientID = Start(PORT=19998)
+		# retrieve revolute joint handles 
+		errorCode, liftHandler = vrep.simxGetObjectHandle(clientID,'Prismatic_joint_dsCLB',vrep.simx_opmode_oneshot_wait)
+
 		print("liftDirection is : {}". format(liftDirection))
 		if liftDirection == 'up':
 			returnCode = vrep.simxSetJointTargetPosition(clientID,liftHandler,-0.03,vrep.simx_opmode_oneshot)
@@ -62,6 +79,11 @@ def cubeRotatorLifterControlFun(angleBase, angleHolder, liftDirection):
 
 if __name__ == "__main__":
 	# without using ROS node
-	cubeRotatorLifterControlFun(-45,0,0)
+	cubeRotatorLifterControlFun(-45,None,None)
+	time.sleep(1)
 	#cubeRotatorLifterControlFun(135,0,0)
 	cubeRotatorLifterControlFun(None,None,'up')
+	time.sleep(1)
+	cubeRotatorLifterControlFun(None,None,'down')
+	time.sleep(1)
+	cubeRotatorLifterControlFun(135,None,None)
