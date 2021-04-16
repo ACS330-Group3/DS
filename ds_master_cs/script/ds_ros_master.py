@@ -114,7 +114,17 @@ def cube_rotator():
 	if str(rospy.get_param("/ds_ud_Location")) == 'CubeRotator':
 		rospy.loginfo("ds_ros_master.py - Cube located at CubeRotator! CubeRotator Action init.")
 
-		for imgRequestPositionNum in range(1,6+1): # included 1,2,3,4,5,6
+		for imgRequestPositionNum in range(1,2+1): # included 1,2,3,4,5,6
+			if imgRequestPositionNum == 2:
+				rospy.set_param('ds_robot_arm_EmergencyS', True)
+				rospy.loginfo("ds_ros_master.py - Emergency activated!")
+			while rospy.get_param("/ds_robot_arm_EmergencyS"):
+				if counter == 0:
+					rospy.loginfo("ds_ros_master.py - Emergency activated! - Please unclock action with rostopic pub /ds_continue_button std_msgs/Bool data: true !!!")
+					counter = 600 # show info every 3 secs
+				counter = counter - 1
+				time.sleep(.005) # pause when ds_robot_arm_EmergencyS is true
+# set parameter to emergency stop
 			#imgRequestPositionNum = 1
 			rospy.wait_for_service("/ds_CRotate_ser")
 			try:
