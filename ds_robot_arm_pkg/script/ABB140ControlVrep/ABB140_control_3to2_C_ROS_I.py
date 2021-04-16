@@ -229,8 +229,8 @@ def draw_VREP(factor, path, points, Z_draw, x, y):
     clientID= Start()
 
     # Identify the VREP environment objects
-    _, plane = vrep.simxGetObjectHandle(clientID, u'DSCube', vrep.simx_opmode_oneshot_wait) # Reference point on the drawing plane
-    #_, plane = vrep.simxGetObjectHandle(clientID, u'Dummy', vrep.simx_opmode_oneshot_wait) # DummyCube/DSCube/Cuboid
+    _, plane = vrep.simxGetObjectHandle(clientID, u'DummyCubeDrawPoint', vrep.simx_opmode_oneshot_wait) # Reference point on the drawing plane
+    #_, plane = vrep.simxGetObjectHandle(clientID, u'Dummy', vrep.simx_opmode_oneshot_wait) # DummyCube/DSCube/Cuboid/DummyCubeDrawPoint
     _, target = vrep.simxGetObjectHandle(clientID, u'IRB140_target', vrep.simx_opmode_oneshot_wait) # End effector joint Reference
 
     #print (u"plane ID: {}".format(plane))
