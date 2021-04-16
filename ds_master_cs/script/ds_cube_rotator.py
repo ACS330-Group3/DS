@@ -7,11 +7,18 @@ import rospy
 
 from ud_msgs.srv import dsCRotatesrv
 
+from ControlVRep.cubeRotatorLifterControl import *
+# import rotate function
+
+import time
+
 def CRotateSerHandle(req):
 	if req.imgRequestPosition == 0: # rotate
 		rospy.loginfo("CRotate service request received : 0 position")
+		cubeRotatorLifterControlFun(-45,0,0)
+		time.sleep(1) #pause 1 secs
 		# rotate function for VRep - check parameter with /ds_robot_arm_EmergencyS is false
-		rospy.loginfo("CRotate service provided : to 1st position")
+		rospy.loginfo("CRotate service provided : to 1st position : -45(degree)")
 		return True	
 	elif req.imgRequestPosition == 1: # grab
 		rospy.loginfo("CRotate service request received : 1st position")
@@ -20,8 +27,10 @@ def CRotateSerHandle(req):
 		return True		
 	elif req.imgRequestPosition == 2: # rotate the cube rotator base with 180 degree
 		rospy.loginfo("CRotate service request received : 2nd position")
+		cubeRotatorLifterControlFun(135,0,0)
+		time.sleep(1) #pause 1 secs
 		# rotate function for VRep - check parameter with /ds_robot_arm_EmergencyS is false
-		rospy.loginfo("CRotate service provided : 2nd position")
+		rospy.loginfo("CRotate service provided : 2nd position : 135(degree)")
 		return True	
 	elif req.imgRequestPosition == 3: # rotate
 		rospy.loginfo("CRotate service request received : 3rd position")

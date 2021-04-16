@@ -78,7 +78,7 @@ def distance(x1, y1, x2, y2):
     return dist
 
 # 
-def Start(IP=u'127.0.0.1', PORT=19999):# Local IP and API address (19999)
+def Start(IP=u'127.0.0.1', PORT=19996):# Local IP and API address (19999)
     u'''
     This fucntion starts the communication with the simulator
     Important: 
