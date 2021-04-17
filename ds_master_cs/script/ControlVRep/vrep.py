@@ -4,7 +4,7 @@ import sys
 import os
 import ctypes as ct
 try:
-    from ABB140ControlVrep.vrepConst import *
+    from ControlVRep.vrepConst import *
 except ImportError:
     from vrepConst import *
 else:
