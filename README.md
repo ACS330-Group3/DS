@@ -7,7 +7,8 @@ Cmd environment for ROS master control:
 1. open VRep
 cd ~/Downloads/V-REP_PRO_EDU_V3_6_1_Ubuntu18_04/
 ./vrep.sh
-File > Open Scene > located "ABB140_Draws_Cube01.ttt" > press run
+File > Open Scene > located "DS_full_assemmbly_pureShape_joint_hie.ttt" > press run
+/home/sky/catkin_ws_uD/src/VRep_model/DS
 
 2. using roslaunch for launching ds node
 roslaunch ud_bringup ds_system.launch
