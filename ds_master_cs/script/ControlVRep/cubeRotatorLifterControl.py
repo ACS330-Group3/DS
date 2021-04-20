@@ -12,7 +12,7 @@ try:
 except ImportError:
     import vrep     # run with python directly
 else:
-    print("Message from cubeRotatorLifterControl.py : import Vrep Success!")
+    rospy.loginfo("Message from cubeRotatorLifterControl.py : import Vrep Success!")
 
 def Start(IP='127.0.0.1', PORT=19998):# Local IP and API address (19999)
 	# This fucntion starts the communication with the simulator
@@ -20,10 +20,10 @@ def Start(IP='127.0.0.1', PORT=19998):# Local IP and API address (19999)
 	clientID=vrep.simxStart(IP, PORT, True, True, 5000, 5) # Start a new connection in the VREP default port 19999 
 	while clientID == -1:
 		clientID=vrep.simxStart(IP, PORT, True, True, 5000, 5) # Start a new connection in the VREP default port 19999 # Keep connecting if connection not established
-		print("cubeRotatorLifterControl.py - Fail to connect VRep, reconnecting!")
+		rospy.loginfo("cubeRotatorLifterControl.py - Fail to connect VRep, reconnecting!")
 		#rospy.set_param('ds_vrep_connected', False)
 		time.sleep(.005)
-	print("cubeRotatorLifterControl.py - Connection stablished with VRep")
+	rospy.loginfo("cubeRotatorLifterControl.py - Connection stablished with VRep")
 	#rospy.set_param('ds_vrep_connected', True)
 	return clientID
 

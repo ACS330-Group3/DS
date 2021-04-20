@@ -7,6 +7,7 @@ import rospy
 import time
 
 from std_msgs.msg import Bool
+from std_msgs.msg import String
 from ud_msgs.msg import CubeLifterMessagePkg
 from ud_msgs.msg import PicInfoMessagePkg
 from ud_msgs.srv import robotACSsrv
@@ -15,9 +16,11 @@ from ud_msgs.srv import dsCLiftsrv
 from ud_msgs.srv import dsCRotatesrv
 
 def udice_received(req):
-	if req.udiceReceived == True and req.ds_Cube_ID != '':
-		rospy.loginfo("ds_ros_master.py - uDice id : {}".format(req.ds_Cube_ID))
-		rospy.set_param('ds_C_ID', req.ds_Cube_ID)
+	#if req.udiceReceived == True and req.ds_Cube_ID != '':
+	if req.data != '':
+		ds_Cube_ID = req.data # ds_Cube_ID = req.ds_Cube_ID
+		rospy.loginfo("ds_ros_master.py - uDice id : {}".format(ds_Cube_ID))
+		rospy.set_param('ds_C_ID', ds_Cube_ID)
 		#rospy.set_param('ds_ud_Location', 'CubeLifter')
 		#check cube location
 		rospy.wait_for_service("/ds_CL_ser") # related code ds_cube_locator_ser.py not completed
@@ -179,7 +182,9 @@ if __name__ == "__main__":
 	rospy.init_node("ds_ros_master")
 	rospy.loginfo("ds_ros_master node created")
 
-	sub1 = rospy.Subscriber("/ds_cube_sensed",CubeLifterMessagePkg,udice_received)
+	# need tuning with String msg type
+	sub1 = rospy.Subscriber("/ds_cube_sensed",String,udice_received)
+	#sub1 = rospy.Subscriber("/ds_cube_sensed",CubeLifterMessagePkg,udice_received)
 
 	pub1 = rospy.Publisher("/ds_pic_retrieve_ProcessStart", Bool, queue_size=10) # server need to connect to central system
 

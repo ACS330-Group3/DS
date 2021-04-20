@@ -29,7 +29,7 @@ filename = os.path.join(dirname, "ABB140ControlVrep/Images/smile.png") #ds_test/
 def robot_drawing(v_pic2drawpath):
     print("Using Pic from following location:")
     print(v_pic2drawpath)
-    print("Draw function start")
+    rospy.loginfo("Draw function start")
     #rgb_img = cv2.imread(filename)
     #cv2.imshow("ROS Original Pic", rgb_img)
     # Drawing plane Height Constant - According to the VREP model
