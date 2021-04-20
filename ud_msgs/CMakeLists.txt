@@ -69,6 +69,7 @@ find_package(catkin REQUIRED COMPONENTS
    dsCLsrv.srv
    dsCLiftsrv.srv
    dsCRotatesrv.srv
+   csSendImages.srv
  )
 
 ## Generate actions in the 'action' folder
