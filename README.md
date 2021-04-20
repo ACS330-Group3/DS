@@ -4,8 +4,6 @@ Cmd environment for ROS master control:
 
 # Steps
 
-Cmd environment for ROS master control:
-
 1. open VRep
 cd ~/Downloads/V-REP_PRO_EDU_V3_6_1_Ubuntu18_04/
 ./vrep.sh
