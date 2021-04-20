@@ -59,6 +59,3 @@ rostopic echo /rosout
 4. send fake RFID ID
 rostopic pub /ds_cube_sensed std_msgs/String "data: '11'"
 
-# not in use for the following
-#rostopic pub /ds_cube_sensed std_msgs/String "data: 'sky'"
-#rostopic pub /ds_cube_sensed ud_msgs/CubeLifterMessagePkg "{udiceReceived: true, udiceWeight: 0.0, ds_Cube_ID: 'sky'}" 
