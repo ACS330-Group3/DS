@@ -42,7 +42,7 @@ def imghandle(req):
 		return IDPicName,ImgList[0],ImgList[1],ImgList[2],ImgList[3],ImgList[4],ImgList[5]
 		
 if __name__ == "__main__":
-	rospy.init_node("CS_Img_Publish_Server")
+	rospy.init_node("cs_Img_Publish_Server")
 	rospy.loginfo("CS_Img_Publish_Server node created")
 	service = rospy.Service("/cs_image_service", csSendImages, imghandle)
 	rospy.loginfo("CS_Img_Publish_Server server started")

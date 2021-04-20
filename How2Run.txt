@@ -44,13 +44,17 @@ rosrun ds_master_cs ds_cube_rotator.py
 2.9. run the python ds_cube_locator_ser.py
 rosrun ds_visual_system_pkg ds_cube_locator_ser.py
 
+2.10. run the python cs_imagepubserv.py
+rosrun ds_visual_system_pkg cs_imagepubserv.py
+
 3. print out all the rosinfo
 rostopic echo /rosout
 
 4. send fake RFID ID
-rostopic pub /ds_cube_sensed std_msgs/String "data: 'sky'"
+rostopic pub /ds_cube_sensed std_msgs/String "data: '11'"
 
 # not in use for the following
+#rostopic pub /ds_cube_sensed std_msgs/String "data: 'sky'"
 #rostopic pub /ds_cube_sensed ud_msgs/CubeLifterMessagePkg "{udiceReceived: true, udiceWeight: 0.0, ds_Cube_ID: 'sky'}" 
 
 

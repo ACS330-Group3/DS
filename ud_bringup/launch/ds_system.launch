@@ -17,7 +17,6 @@
 	<node name="ds_robot_arm_control_server" pkg="ds_robot_arm_pkg" type="ros_abb140control_ser.py" />
 
 	<node name="ds_pic_retrieve_service" pkg="ds_master_cs" type="ds_pic_retrive.py" />
-	<!-- comment: python code edit not finished! -->
 	<node name="ds_ros_master" pkg="ds_master_cs" type="ds_ros_master.py" />
 	<!-- comment: python code edit not finished! -->
 	<node name="ds_cube_lifter_server" pkg="ds_master_cs" type="ds_cube_lifter.py" />
@@ -25,6 +24,7 @@
 	<node name="ds_cube_rotate_server" pkg="ds_master_cs" type="ds_cube_rotator.py" />
 	<!-- comment: python code edit not finished! -->
 
+	<node name="cs_Img_Publish_Server" pkg="ds_visual_system_pkg" type="cs_imagepubserv.py" />
 	<node name="ds_cube_locator_server" pkg="ds_visual_system_pkg" type="ds_cube_locator_ser.py" />
 	<!-- comment: python code edit not finished! -->
 

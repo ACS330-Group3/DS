@@ -21,7 +21,7 @@ def pic_retrieve_ProcessStart(req):
 		rospy.wait_for_service("/cs_image_service")
 		try:
 			pubimage = rospy.ServiceProxy("/cs_image_service", csSendImages)
-			rospy.set_param('ds_C_ID', 11) # need to delete after integration
+			#rospy.set_param('ds_C_ID', 11) # need to delete after integration
 			CubeID = str(rospy.get_param("/ds_C_ID"))
 			response = pubimage(CubeID)
 			IDPicName = str(response.picName)
