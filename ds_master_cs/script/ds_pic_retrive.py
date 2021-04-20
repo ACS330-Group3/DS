@@ -25,25 +25,21 @@ def pic_retrieve_ProcessStart(req):
 			CubeID = str(rospy.get_param("/ds_C_ID"))
 			response = pubimage(CubeID)
 			IDPicName = str(response.picName)
-			PicNum = 1
-			filename = CubeID+'_'+IDPicName+'_'+str(PicNum)+'.png'
-			filepath = os.path.join(picfolder, filename)
-			rospy.loginfo("Image Received:")
-			#rospy.loginfo(str(response.im1))
 			rospy.loginfo("IDPicName:{}". format(IDPicName))
-			br = CvBridge()
-			image = br.imgmsg_to_cv2(response.im1, desired_encoding='passthrough')
-			#image = br.imgmsg_to_cv2(response.im)
-			cv2.imwrite(filename, image)
-			#cv2.imwrite(r'abc.jpg', image)
-
+			for PicNum in range(1,6+1): # included 1,2,3,4,5,6
+				filename = CubeID+'_'+IDPicName+'_'+str(PicNum)+'.png'
+				filepath = os.path.join(picfolder, filename)
+				rospy.loginfo("Image Received - {}". format(filename))
+				#rospy.loginfo(str(response.im1))
+				br = CvBridge()
+				image = br.imgmsg_to_cv2(response.im1, desired_encoding='passthrough')
+				#image = br.imgmsg_to_cv2(response.im)
+				cv2.imwrite(filepath, image)
+				#cv2.imwrite(r'abc.jpg', image)
 			pub1.publish(True,CubeID,IDPicName)
 			
 		except rospy.ServiceException as e:
 			rospy.logwarn("service failed: " + str(e))
-
-
-		
 
 if __name__ == "__main__":
 	rospy.init_node("ds_pic_retrieve_service")

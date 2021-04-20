@@ -13,15 +13,17 @@ def imghandle(req):
 	if req.requestID != '':
 		requestID = str(req.requestID)
 		IDPicName = '450'
-		PicNum = 1
-		filename = requestID+'_'+IDPicName+'_'+str(PicNum)+'.png'
-		filepath = os.path.join(picfolder, filename)
-		image = cv2.imread(filepath)
-		br = CvBridge()
-		rospy.loginfo('DONEG')
-		image1 = br.cv2_to_imgmsg(image, encoding='passthrough')
+		ImgList = []
+		for PicNum in range(1,6+1): # included 1,2,3,4,5,6
+			filename = requestID+'_'+IDPicName+'_'+str(PicNum)+'.png'
+			filepath = os.path.join(picfolder, filename)
+			image = cv2.imread(filepath)
+			br = CvBridge()
+			rospy.loginfo("Image of {} is sent!". format(filename))
+			ImgList.append(br.cv2_to_imgmsg(image, encoding='passthrough'))
+			#image1 = br.cv2_to_imgmsg(image, encoding='passthrough')
 		#image1 = br.cv2_to_imgmsg(image)
-		return IDPicName,image1
+		return IDPicName,ImgList[0],ImgList[1],ImgList[2],ImgList[3],ImgList[4],ImgList[5]
 		
 if __name__ == "__main__":
 	rospy.init_node("CS_Img_Publish_Server")

@@ -125,7 +125,7 @@ def cube_rotator():
 	if str(rospy.get_param("/ds_ud_Location")) == 'CubeRotator':
 		rospy.loginfo("ds_ros_master.py - Cube located at CubeRotator! CubeRotator Action init.")
 
-		for imgRequestPositionNum in range(1,2+1): # included 1,2,3,4,5,6
+		for imgRequestPositionNum in range(1,2+1): # included 1,2
 
 			#if imgRequestPositionNum == 2:
 				#rospy.set_param('ds_robot_arm_EmergencyS', True)
