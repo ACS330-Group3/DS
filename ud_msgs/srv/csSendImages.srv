@@ -1,5 +1,6 @@
 string requestID
 ---
+string picName
 sensor_msgs/Image im1
 sensor_msgs/Image im2
 sensor_msgs/Image im3
