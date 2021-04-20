@@ -4,11 +4,13 @@ Cmd environment for ROS master control:
 
 # Steps
 
+Cmd environment for ROS master control:
+
 1. open VRep
 cd ~/Downloads/V-REP_PRO_EDU_V3_6_1_Ubuntu18_04/
 ./vrep.sh
 File > Open Scene > located "DS_full_assemmbly_pureShape_joint_hie.ttt" > press run
-/home/sky/catkin_ws_uD/src/VRep_model/DS
+>> /home/sky/catkin_ws_uD/src/VRep_model/DS
 
 2. using roslaunch for launching ds node
 roslaunch ud_bringup ds_system.launch
@@ -48,15 +50,15 @@ rosrun ds_master_cs ds_cube_rotator.py
 2.9. run the python ds_cube_locator_ser.py
 rosrun ds_visual_system_pkg ds_cube_locator_ser.py
 
+2.10. run the python cs_imagepubserv.py
+rosrun ds_visual_system_pkg cs_imagepubserv.py
+
 3. print out all the rosinfo
 rostopic echo /rosout
 
 4. send fake RFID ID
-rostopic pub /ds_cube_sensed ud_msgs/CubeLifterMessagePkg "{udiceReceived: true, udiceWeight: 0.0, ds_Cube_ID: 'sky'}" 
+rostopic pub /ds_cube_sensed std_msgs/String "data: '11'"
 
-
-
-
-
-
-
+# not in use for the following
+#rostopic pub /ds_cube_sensed std_msgs/String "data: 'sky'"
+#rostopic pub /ds_cube_sensed ud_msgs/CubeLifterMessagePkg "{udiceReceived: true, udiceWeight: 0.0, ds_Cube_ID: 'sky'}" 
