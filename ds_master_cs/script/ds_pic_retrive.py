@@ -26,15 +26,22 @@ def pic_retrieve_ProcessStart(req):
 			response = pubimage(CubeID)
 			IDPicName = str(response.picName)
 			rospy.loginfo("IDPicName:{}". format(IDPicName))
+			ImgList = []
+			br = CvBridge()
+			#image = br.imgmsg_to_cv2(response.im1, desired_encoding='passthrough')
+			ImgList.append(br.imgmsg_to_cv2(response.im1, desired_encoding='passthrough'))
+			ImgList.append(br.imgmsg_to_cv2(response.im2, desired_encoding='passthrough'))
+			ImgList.append(br.imgmsg_to_cv2(response.im3, desired_encoding='passthrough'))
+			ImgList.append(br.imgmsg_to_cv2(response.im4, desired_encoding='passthrough'))
+			ImgList.append(br.imgmsg_to_cv2(response.im5, desired_encoding='passthrough'))
+			ImgList.append(br.imgmsg_to_cv2(response.im6, desired_encoding='passthrough'))
 			for PicNum in range(1,6+1): # included 1,2,3,4,5,6
 				filename = CubeID+'_'+IDPicName+'_'+str(PicNum)+'.png'
 				filepath = os.path.join(picfolder, filename)
 				rospy.loginfo("Image Received - {}". format(filename))
 				#rospy.loginfo(str(response.im1))
-				br = CvBridge()
-				image = br.imgmsg_to_cv2(response.im1, desired_encoding='passthrough')
-				#image = br.imgmsg_to_cv2(response.im)
-				cv2.imwrite(filepath, image)
+
+				cv2.imwrite(filepath, ImgList[PicNum-1])
 				#cv2.imwrite(r'abc.jpg', image)
 			pub1.publish(True,CubeID,IDPicName)
 			

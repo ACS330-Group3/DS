@@ -5,14 +5,30 @@ from ud_msgs.srv import csSendImages
 from cv_bridge import CvBridge
 import cv2
 import os
+from glob import glob
 
 dirname = os.path.dirname(__file__)
-picfolder = os.path.join(dirname, "cs_image")
+savedfolderName = "cs_image"
+picfolder = os.path.join(dirname, savedfolderName)
+img_all_path = os.path.join(picfolder, "*.png")
 
 def imghandle(req):
 	if req.requestID != '':
 		requestID = str(req.requestID)
-		IDPicName = '450'
+		img_addrs = glob(img_all_path)
+		print(img_addrs)
+		for i in range(len(img_addrs)):
+			temp_glob_path = img_addrs[i]
+			temp_glob_imgFileName = (temp_glob_path.split(savedfolderName+"/"))[1]
+			#print("temp_glob_imgFileName : {}". format(temp_glob_imgFileName))
+			temp_glob_imgFileID = (temp_glob_imgFileName.split("_"))[0]
+			temp_glob_imgFileName = (temp_glob_imgFileName.split("_"))[1]
+			#print("temp_glob_path : {}". format(temp_glob_imgFileName))
+			if temp_glob_imgFileID == requestID:
+				#print("-----------")
+				IDPicName = temp_glob_imgFileName
+				#print("IDPicName is {}". format(IDPicName))
+		#IDPicName = '450'
 		ImgList = []
 		for PicNum in range(1,6+1): # included 1,2,3,4,5,6
 			filename = requestID+'_'+IDPicName+'_'+str(PicNum)+'.png'
