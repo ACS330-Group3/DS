@@ -7,6 +7,8 @@ import cv2
 import os
 from glob import glob
 
+from cs_downloadImage import *
+
 dirname = os.path.dirname(__file__)
 savedfolderName = "cs_image"
 picfolder = os.path.join(dirname, savedfolderName)
@@ -15,6 +17,7 @@ img_all_path = os.path.join(picfolder, "*.png")
 def imghandle(req):
 	if req.requestID != '':
 		requestID = str(req.requestID)
+		retrieveImage(int(requestID))
 		img_addrs = glob(img_all_path)
 		print(img_addrs)
 		for i in range(len(img_addrs)):
