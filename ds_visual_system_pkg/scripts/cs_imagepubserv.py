@@ -18,6 +18,7 @@ def imghandle(req):
 	if req.requestID != '':
 		requestID = str(req.requestID)
 		retrieveImage(int(requestID))
+		#time.sleep(10)
 		img_addrs = glob(img_all_path)
 		print(img_addrs)
 		for i in range(len(img_addrs)):
