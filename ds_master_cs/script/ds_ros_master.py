@@ -15,6 +15,8 @@ from ud_msgs.srv import dsCLsrv
 from ud_msgs.srv import dsCLiftsrv
 from ud_msgs.srv import dsCRotatesrv
 
+from VisionControlVRep.ds_qc_vs_vrep import *
+
 def udice_received(req):
 	#if req.udiceReceived == True and req.ds_Cube_ID != '':
 	if req.data != '':
@@ -156,6 +158,7 @@ def cube_rotator():
 							counter = 600 # show info every 3 secs
 						counter = counter - 1
 						time.sleep(.005) # pause when ds_robot_arm_EmergencyS is true
+					vsQC(imgRequestPositionNum)
 				else:
 					rospy.loginfo("CRotate not successed! - Cube rotator not rotate!")
 			except rospy.ServiceException as e:
