@@ -15,6 +15,7 @@ from skimage import measure
 #from google.colab import files
 
 import os
+import time
 
 dirname = os.path.dirname(__file__)
 savedfolderName = "ds_img_qc"
@@ -40,10 +41,10 @@ def compare_images(imageA, imageB, title):
   ax = fig.add_subplot(1, 2, 2)
   plt.imshow(imageB, cmap = plt.cm.gray)
   plt.axis("off")
-  plt.show()
+  #plt.show()
   return s,m
 
-if __name__ == "__main__":
+def img_compare_main():
 	#uploaded = files.upload()
 	fileNameO1 = 'vsQC_1.jpg'
 	fileNameO2 = 'vsQC_2.jpg'
@@ -72,10 +73,11 @@ if __name__ == "__main__":
 		# show the image
 		ax = fig.add_subplot(2, 2, i + 1)
 		ax.set_title(name)
-		plt.imshow(image, cmap = plt.cm.gray)
-		plt.axis("off")
+		#plt.imshow(image, cmap = plt.cm.gray)
+		#plt.axis("off")
+		cv2.imshow('image'+str(i),image)
 	# show the figure
-	plt.show()
+	#plt.show()
 	# compare the images
 	[s,m] = compare_images(original1, captured1, "Original1 vs. Captured1")
 	[s1,m1]= compare_images(original2, captured2, "Original2 vs. Captured2")
@@ -84,3 +86,11 @@ if __name__ == "__main__":
 	  print ("Image Matched")
 	else:
 	  print ("Print Error")
+
+	while cv2.waitKey(1) & 0xFF == ord('q'):
+		time.sleep(1)
+				#break
+
+if __name__ == "__main__":
+	img_compare_main()
+
